@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Accordion } from './components/accordion/accordion';
+import { CountyPicker } from './components/county-picker/county-picker';
 import { Listbox } from './components/listbox/listbox';
 import { TabGroup } from './components/tab-group/tab-group';
 import { COUNTY_OPTIONS, PROVINCE_SECTIONS, PROVINCE_TABS } from './demo-data';
 
 @Component({
-  imports: [RouterOutlet, TabGroup, Accordion, Listbox],
+  imports: [RouterOutlet, CountyPicker, TabGroup, Accordion, Listbox],
   selector: 'app-root',
   styles: [],
   template: `
@@ -15,6 +16,11 @@ import { COUNTY_OPTIONS, PROVINCE_SECTIONS, PROVINCE_TABS } from './demo-data';
         <h1 class="text-2xl font-bold">Kenya's 47 counties</h1>
         <p class="mt-1 text-gray-600">Headless UI with Angular Aria and Tailwind CSS</p>
       </header>
+
+      <section>
+        <h2 class="mb-4 text-lg font-semibold">Combobox: find your county</h2>
+        <app-county-picker />
+      </section>
 
       <section>
         <h2 class="mb-4 text-lg font-semibold">Tabs: counties by former province</h2>
