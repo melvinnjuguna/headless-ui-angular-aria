@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "angular-latest": {
+    "headless-ui-angular-aria": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -84,10 +84,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "angular-latest:build:production"
+              "buildTarget": "headless-ui-angular-aria:build:production"
             },
             "development": {
-              "buildTarget": "angular-latest:build:development"
+              "buildTarget": "headless-ui-angular-aria:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -96,7 +96,7 @@
           "builder": "@storybook/angular-vite:start-storybook",
           "options": {
             "configDir": ".storybook",
-            "browserTarget": "angular-latest:build",
+            "browserTarget": "headless-ui-angular-aria:build",
             "styles": [
               "src/styles.css"
             ],
@@ -107,7 +107,7 @@
           "builder": "@storybook/angular-vite:build-storybook",
           "options": {
             "configDir": ".storybook",
-            "browserTarget": "angular-latest:build",
+            "browserTarget": "headless-ui-angular-aria:build",
             "styles": [
               "src/styles.css"
             ],

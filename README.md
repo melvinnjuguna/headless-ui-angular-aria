@@ -1,59 +1,65 @@
-# AngularLatest
+# headless-ui-angular-aria
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.5.
+Accessible, unstyled UI components for Angular, built on [`@angular/aria`](https://angular.dev/guide/aria/overview) and styled with [Tailwind CSS](https://tailwindcss.com).
 
-## Development server
+`@angular/aria` handles the hard parts: keyboard navigation, focus management and ARIA attributes. This project builds reusable components on top of it, so that styling stays entirely in your hands.
 
-To start a local development server, run:
+> **Status:** early development. The tooling is set up and the first components are on the way.
 
-```bash
-ng serve
-```
+## Tech stack
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- [Angular 22](https://angular.dev) with standalone components and signals
+- [`@angular/aria`](https://angular.dev/guide/aria/overview) for accessibility behavior
+- [Tailwind CSS v4](https://tailwindcss.com) for styling (plain CSS, no Sass)
+- [Storybook 10](https://storybook.js.org) to develop and document components
+- [Vitest](https://vitest.dev) with Playwright to run stories as tests, including accessibility checks
 
-## Code scaffolding
+## Getting started
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+You need Node.js `^22.22.3`, `^24.15.0` or `>=26`.
 
 ```bash
-ng generate --help
+git clone https://github.com/melvinnjuguna/headless-ui-angular-aria.git
+cd headless-ui-angular-aria
+npm install
+npx playwright install chromium   # one-time, needed for npm test
 ```
 
-## Building
+## Scripts
 
-To build the project run:
+| Command                   | What it does                                                    |
+| ------------------------- | --------------------------------------------------------------- |
+| `npm start`               | Runs the demo app at <http://localhost:4200>                    |
+| `npm run storybook`       | Opens Storybook at <http://localhost:6006>                      |
+| `npm test`                | Runs every Storybook story as a test in headless Chromium       |
+| `npm run build`           | Builds the demo app for production into `dist/`                 |
+| `npm run build-storybook` | Builds a static Storybook into `storybook-static/`              |
 
-```bash
-ng build
-```
+## Testing
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Tests are written as Storybook stories. `npm test` runs each story in a real browser through the [Storybook Vitest addon](https://storybook.js.org/docs/writing-tests/integrations/vitest-addon). Each story is checked for:
 
-## Running unit tests
+- **Rendering:** the story must render without errors.
+- **Interactions:** any `play` function on the story is run, for example to simulate keyboard navigation.
+- **Accessibility:** [axe](https://github.com/dequelabs/axe-core) checks through `@storybook/addon-a11y`. Violations currently show up in the test UI without failing the run. To make them fail CI, set `a11y.test` to `'error'` in `.storybook/preview.ts`.
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+Use `npm test -- --run` for a single run without watch mode, for example in CI.
 
-```bash
-ng test
-```
+## Styling
 
-## Running end-to-end tests
+Global styles live in `src/styles.css`, which imports Tailwind. Both the app and Storybook load this file. Style components with Tailwind utility classes in their templates.
 
-For end-to-end (e2e) testing, run:
+`@angular/aria` exposes component state through ARIA attributes, so you can style state with Tailwind's `aria-*` variants, for example `aria-selected:bg-blue-600` or `aria-expanded:rotate-180`.
 
-```bash
-ng e2e
-```
+## Contributing
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Contributions are welcome.
 
-## Additional Resources
+1. Fork the repo and create a branch from `main`.
+2. Generate components with `ng generate component <name>`. The project defaults give you an inline template, inline CSS and no `.spec.ts` file.
+3. Add a `*.stories.ts` file next to each component, covering its main states and keyboard behavior.
+4. Before opening a pull request, check that `npm test -- --run` and `npm run build` both pass.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## License
+
+[MIT](LICENSE) © 2026 Melvin Njuguna

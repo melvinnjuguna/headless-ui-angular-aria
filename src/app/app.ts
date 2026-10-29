@@ -12,5 +12,5 @@ import { RouterOutlet } from '@angular/router';
   `,
 })
 export class App {
-  protected readonly title = signal('angular-latest');
+  protected readonly title = signal('headless-ui-angular-aria');
 }
