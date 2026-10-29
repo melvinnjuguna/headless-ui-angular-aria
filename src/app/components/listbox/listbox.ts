@@ -21,7 +21,7 @@ let nextId = 0;
       [multi]="multi()"
       [selectionMode]="multi() ? 'explicit' : 'follow'"
       [attr.aria-labelledby]="labelId"
-      class="w-64 space-y-1 rounded-md border border-gray-300 p-1"
+      class="max-h-72 w-64 space-y-1 overflow-y-auto rounded-md border border-gray-300 p-1"
     >
       @for (option of options(); track option.value) {
         <li

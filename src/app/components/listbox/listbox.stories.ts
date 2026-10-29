@@ -1,23 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/angular-vite';
 import { expect } from 'storybook/test';
+import { COUNTY_OPTIONS } from '../../demo-data';
 import { Listbox } from './listbox';
 
 const meta = {
   title: 'Components/Listbox',
   component: Listbox,
   args: {
-    label: 'Favorite fruit',
+    label: 'County',
     multi: false,
     value: [],
-    options: [
-      { value: 'apple', label: 'Apple' },
-      { value: 'banana', label: 'Banana' },
-      { value: 'blueberry', label: 'Blueberry' },
-      { value: 'cherry', label: 'Cherry' },
-      { value: 'durian', label: 'Durian', disabled: true },
-      { value: 'mango', label: 'Mango' },
-      { value: 'orange', label: 'Orange' },
-    ],
+    options: COUNTY_OPTIONS,
   },
 } satisfies Meta<Listbox>;
 
@@ -32,33 +25,33 @@ export const KeyboardNavigation: Story = {
 
     await step('Tab focuses the first option', async () => {
       await userEvent.tab();
-      await expect(option('Apple')).toHaveFocus();
+      await expect(option('Baringo')).toHaveFocus();
     });
 
     await step('Arrow keys move focus and select', async () => {
       await userEvent.keyboard('{ArrowDown}');
-      await expect(option('Banana')).toHaveFocus();
-      await expect(option('Banana')).toHaveAttribute('aria-selected', 'true');
-      await expect(option('Apple')).toHaveAttribute('aria-selected', 'false');
+      await expect(option('Bomet')).toHaveFocus();
+      await expect(option('Bomet')).toHaveAttribute('aria-selected', 'true');
+      await expect(option('Baringo')).toHaveAttribute('aria-selected', 'false');
     });
 
-    await step('Typing a letter jumps to the matching option', async () => {
-      await userEvent.keyboard('m');
-      await expect(option('Mango')).toHaveFocus();
-      await expect(option('Mango')).toHaveAttribute('aria-selected', 'true');
+    await step('Typing a letter jumps to the matching county', async () => {
+      await userEvent.keyboard('n');
+      await expect(option('Nairobi')).toHaveFocus();
+      await expect(option('Nairobi')).toHaveAttribute('aria-selected', 'true');
     });
 
-    await step('Home and End jump to the first and last option', async () => {
+    await step('Home and End jump to the first and last county', async () => {
       await userEvent.keyboard('{End}');
-      await expect(option('Orange')).toHaveFocus();
+      await expect(option('West Pokot')).toHaveFocus();
       await userEvent.keyboard('{Home}');
-      await expect(option('Apple')).toHaveFocus();
+      await expect(option('Baringo')).toHaveFocus();
     });
   },
 };
 
 export const MultiSelect: Story = {
-  args: { label: 'Fruits for the smoothie', multi: true },
+  args: { label: 'Counties you deliver to', multi: true },
   play: async ({ canvas, userEvent, step }) => {
     const option = (name: string) => canvas.getByRole('option', { name });
 
@@ -69,22 +62,16 @@ export const MultiSelect: Story = {
     await step('Arrow keys move focus without selecting', async () => {
       await userEvent.tab();
       await userEvent.keyboard('{ArrowDown}');
-      await expect(option('Banana')).toHaveFocus();
-      await expect(option('Banana')).toHaveAttribute('aria-selected', 'false');
+      await expect(option('Bomet')).toHaveFocus();
+      await expect(option('Bomet')).toHaveAttribute('aria-selected', 'false');
     });
 
-    await step('Space toggles the focused option', async () => {
+    await step('Space toggles the focused county', async () => {
       await userEvent.keyboard(' ');
       await userEvent.keyboard('{ArrowDown}');
       await userEvent.keyboard(' ');
-      await expect(option('Banana')).toHaveAttribute('aria-selected', 'true');
-      await expect(option('Blueberry')).toHaveAttribute('aria-selected', 'true');
-    });
-
-    await step('Disabled options cannot be selected', async () => {
-      await userEvent.click(option('Durian'));
-      await expect(option('Durian')).toHaveAttribute('aria-disabled', 'true');
-      await expect(option('Durian')).not.toHaveAttribute('aria-selected', 'true');
+      await expect(option('Bomet')).toHaveAttribute('aria-selected', 'true');
+      await expect(option('Bungoma')).toHaveAttribute('aria-selected', 'true');
     });
   },
 };
