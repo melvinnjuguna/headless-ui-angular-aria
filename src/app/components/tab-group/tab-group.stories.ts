@@ -28,7 +28,7 @@ const meta = {
 } satisfies Meta<TabGroup>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<TabGroup>;
 
 export const Default: Story = {};
 

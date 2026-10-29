@@ -32,6 +32,7 @@ npx playwright install chromium   # one-time, needed for npm test
 | `npm start`               | Runs the demo app at <http://localhost:4200>              |
 | `npm run storybook`       | Opens Storybook at <http://localhost:6006>                |
 | `npm test`                | Runs every Storybook story as a test in headless Chromium |
+| `npm run typecheck`       | Type-checks components and stories                        |
 | `npm run build`           | Builds the demo app for production into `dist/`           |
 | `npm run build-storybook` | Builds a static Storybook into `storybook-static/`        |
 
@@ -58,7 +59,7 @@ Contributions are welcome.
 1. Fork the repo and create a branch from `main`.
 2. Generate components with `ng generate component <name>`. The project defaults give you an inline template, inline CSS and no `.spec.ts` file.
 3. Add a `*.stories.ts` file next to each component, covering its main states and keyboard behavior.
-4. Before opening a pull request, check that `npm test -- --run` and `npm run build` both pass.
+4. Before opening a pull request, check that `npm test -- --run`, `npm run typecheck` and `npm run build` all pass.
 
 ## License
 

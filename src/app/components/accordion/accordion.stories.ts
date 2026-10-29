@@ -28,7 +28,7 @@ const meta = {
 } satisfies Meta<Accordion>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<Accordion>;
 
 export const Default: Story = {};
 
