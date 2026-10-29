@@ -12,7 +12,7 @@
         "@schematics/angular:component": {
           "inlineTemplate": true,
           "inlineStyle": true,
-          "style": "scss",
+          "style": "css",
           "skipTests": true
         },
         "@schematics/angular:class": {
@@ -46,7 +46,6 @@
           "options": {
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
             "assets": [
               {
                 "glob": "**/*",
@@ -54,7 +53,7 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.css"
             ]
           },
           "configurations": {
@@ -98,6 +97,9 @@
           "options": {
             "configDir": ".storybook",
             "browserTarget": "angular-latest:build",
+            "styles": [
+              "src/styles.css"
+            ],
             "port": 6006
           }
         },
@@ -106,6 +108,9 @@
           "options": {
             "configDir": ".storybook",
             "browserTarget": "angular-latest:build",
+            "styles": [
+              "src/styles.css"
+            ],
             "outputDir": "storybook-static"
           }
         }
