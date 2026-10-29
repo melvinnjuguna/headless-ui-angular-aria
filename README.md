@@ -27,13 +27,13 @@ npx playwright install chromium   # one-time, needed for npm test
 
 ## Scripts
 
-| Command                   | What it does                                                    |
-| ------------------------- | --------------------------------------------------------------- |
-| `npm start`               | Runs the demo app at <http://localhost:4200>                    |
-| `npm run storybook`       | Opens Storybook at <http://localhost:6006>                      |
-| `npm test`                | Runs every Storybook story as a test in headless Chromium       |
-| `npm run build`           | Builds the demo app for production into `dist/`                 |
-| `npm run build-storybook` | Builds a static Storybook into `storybook-static/`              |
+| Command                   | What it does                                              |
+| ------------------------- | --------------------------------------------------------- |
+| `npm start`               | Runs the demo app at <http://localhost:4200>              |
+| `npm run storybook`       | Opens Storybook at <http://localhost:6006>                |
+| `npm test`                | Runs every Storybook story as a test in headless Chromium |
+| `npm run build`           | Builds the demo app for production into `dist/`           |
+| `npm run build-storybook` | Builds a static Storybook into `storybook-static/`        |
 
 ## Testing
 
@@ -41,7 +41,7 @@ Tests are written as Storybook stories. `npm test` runs each story in a real bro
 
 - **Rendering:** the story must render without errors.
 - **Interactions:** any `play` function on the story is run, for example to simulate keyboard navigation.
-- **Accessibility:** [axe](https://github.com/dequelabs/axe-core) checks through `@storybook/addon-a11y`. Violations currently show up in the test UI without failing the run. To make them fail CI, set `a11y.test` to `'error'` in `.storybook/preview.ts`.
+- **Accessibility:** [axe](https://github.com/dequelabs/axe-core) checks through `@storybook/addon-a11y`. Any violation fails the test.
 
 Use `npm test -- --run` for a single run without watch mode, for example in CI.
 
