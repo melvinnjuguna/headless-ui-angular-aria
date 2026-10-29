@@ -1,4 +1,5 @@
 import { Component, input, model } from '@angular/core';
+import { Tab, TabContent, TabList, TabPanel, Tabs } from '@angular/aria/tabs';
 
 export interface TabItem {
   value: string;
@@ -8,18 +9,19 @@ export interface TabItem {
 
 @Component({
   selector: 'app-tab-group',
+  imports: [Tabs, TabList, Tab, TabPanel, TabContent],
   template: `
-    <div>
-      <ul>
+    <div ngTabs>
+      <ul ngTabList [(selectedTab)]="selectedTab">
         @for (tab of tabs(); track tab.value) {
-          <li (click)="selectedTab.set(tab.value)">{{ tab.label }}</li>
+          <li ngTab [value]="tab.value">{{ tab.label }}</li>
         }
       </ul>
 
       @for (tab of tabs(); track tab.value) {
-        @if (selectedTab() === tab.value) {
-          <div>{{ tab.content }}</div>
-        }
+        <div ngTabPanel [value]="tab.value">
+          <ng-template ngTabContent>{{ tab.content }}</ng-template>
+        </div>
       }
     </div>
   `,
